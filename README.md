@@ -1,5 +1,7 @@
 # DynamoForms
 
+[![Build Status](https://travis-ci.org/sinaru/dynamo-forms.svg?branch=master)](https://travis-ci.org/sinaru/dynamo-forms)
+
 _Make your HTML forms super smart only with HTML._ 
 
 DynamoForms is a JavaScript library that uses HTML syntax to provide dynamic and advance form validation for your 
