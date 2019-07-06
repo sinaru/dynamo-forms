@@ -1,16 +1,15 @@
 ---
-layout: home
+layout: default
 ---
-
-_Make your HTML forms super smart only with HTML._ 
 
 DynamoForms is a JavaScript library that uses HTML syntax to provide dynamic and advance form validation for your 
 web pages. 
 
 ## Installation
 
-You can either use `dynamo-forms.js` or `dynamo-forms.min.js` found in ['dist'](\dist) folder. Then add `
-.dynamo-forms` css class to each `<form>` you want to validate. 
+You can either use `dynamo-forms.js` or `dynamo-forms.min.js` found in 
+['dist'](https://github.com/sinaru/DynamoForms) folder. Then add `.dynamo-forms` css class to each `<form>` you want 
+to validate. 
 
 In the form you should have an HTML element with `.dynamo-errors`. This is used as the parent element to render the 
 form errors.

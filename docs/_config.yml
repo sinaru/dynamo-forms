@@ -16,9 +16,8 @@
 title: DynamoForms
 email: sinarug@gmail.com
 description: >-
-  Make your HTML forms super smart only with HTML.
-baseurl: "https://sinaru.github.io/DynamoForms/"
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+  Make your web forms super smart only with HTML.
+url: "https://sinaru.github.io/DynamoForms/"
 github_username:  sinaru
 
 # Build settings
