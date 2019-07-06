@@ -1,13 +1,14 @@
-import {expect, sandbox} from './helper';
-
 import DynForm from '../src/dyn-form';
 
+let form;
+let dynForm;
 let formAmountValue = 56.6;
-const firstName = 'Martin';
-
+const formFirstName = 'Martin';
+const submitEvent = new Event('submit');
 let createForm = () => {
   const frm = document.createElement('form');
 
+  jest.spyOn(frm, 'submit').mockImplementation();
   frm.classList.add('dynamo-forms');
   frm.innerHTML = `
       <div class="dynamo-errors"></div>
@@ -26,7 +27,7 @@ let createForm = () => {
                    data-dyn-name="First Name"
                    data-dyn-group="personal_name"
                    data-dyn-group-rule="any-present"
-                   value="${ firstName }"
+                   value="${ formFirstName }"
             >
 
             <label for="last-name">Last Name</label>
@@ -42,66 +43,61 @@ let createForm = () => {
   return frm;
 };
 
-describe('DynForm', function () {
-  beforeEach(function () {
-    this.form = createForm();
+describe('DynForm', () => {
+  beforeEach(() => {
+    form = createForm();
   });
 
-  describe('form submission', function () {
-    beforeEach(function () {
-      this.onSubmitStub = sandbox.stub(DynForm.prototype, 'onSubmit');
-      this.dynForm = new DynForm(this.form);
-      this.form.dispatchEvent(new Event('submit'));
+  describe('form submission', () => {
+    beforeEach(() => {
+      jest.spyOn(DynForm.prototype, 'onSubmit');
+      dynForm = new DynForm(form);
+      form.dispatchEvent(new Event('submit'));
     });
 
-    it('should call #onSubmit', function () {
-      expect(this.onSubmitStub.called).to.equal(true);
+    it('should call #onSubmit', () => {
+      expect(dynForm.onSubmit).toHaveBeenCalled();
     });
   });
 
-  describe('#onSubmit()', function () {
-    beforeEach(function () {
-      this.submitEvent = new Event('submit');
-      this.formSubmitStub = sandbox.stub(this.form, 'submit');
-      this.dynForm = new DynForm(this.form);
+  describe('#onSubmit()', () => {
+    beforeEach(() => {
+      dynForm = new DynForm(form);
     });
 
-    describe('when form is valid', function () {
-      beforeEach(function (done) {
-        this.dynForm.onSubmit(this.submitEvent).then(done);
-      });
+    describe('when form is valid', () => {
+      beforeEach(() => dynForm.onSubmit(submitEvent));
 
-      it('should submit the form', function () {
-        expect(this.formSubmitStub.called).to.equal(true);
+      it('should submit the form', () => {
+        expect(form.submit).toHaveBeenCalled();
       });
     });
 
-    describe('when the form is invalid', function () {
-      beforeEach(function (done) {
+    describe('when the form is invalid', () => {
+      beforeEach(() => {
         formAmountValue = 'invalid amount';
-        this.form = createForm();
-        this.dynForm = new DynForm(this.form);
-        this.formSubmitStub.resetHistory();
-        this.dynForm.onSubmit(this.submitEvent).then(done);
+        form = createForm();
+        dynForm = new DynForm(form);
+        return dynForm.onSubmit(submitEvent);
       });
 
-      it('should not submit the form', function () {
-        expect(this.formSubmitStub.called).to.equal(false);
+      it('should not submit the form', () => {
+        expect(form.submit).not.toHaveBeenCalled();
       });
 
-      it('should render the errors', function () {
-        expect(this.form.querySelector('.dynamo-errors').innerHTML).to.include('Amount should be a number');
+      it('should render the errors', () => {
+        expect(form.querySelector('.dynamo-errors').innerHTML).toContain('Amount should be a number');
       });
     });
   });
 
-  describe('#grouValues()', function () {
-    beforeEach(function () {
-      this.dynForm = new DynForm(this.form);
+  describe('#grouValues()', () => {
+    beforeEach(() => {
+      dynForm = new DynForm(form);
     });
 
-    it('should return all the values for the given group', function () {
-      expect(this.dynForm.groupValues('personal_name')).to.eql(['Martin']);
+    it('should return all the values for the given group', () => {
+      expect(dynForm.groupValues('personal_name')).toEqual(['Martin']);
     });
   });
 });

@@ -33,7 +33,6 @@ module.exports = {
   },
   resolve: {
     modules: [path.resolve('./node_modules'), path.resolve('./src')],
-    extensions: ['.json', '.js'],
-    alias: { sinon: 'sinon/pkg/sinon.js' }
+    extensions: ['.json', '.js']
   }
 };
