@@ -1,4 +1,3 @@
-import {sandbox, expect} from '../helper';
 import Validator from '../../src/validators/validator';
 
 let validator;
@@ -11,36 +10,44 @@ describe('Validator', () => {
 
   describe('#constructor()', function () {
     describe('when options are invalid', function () {
-      beforeEach(function () {
-        sandbox.stub(Validator.prototype, 'isValidOptions').returns(false);
+      beforeEach(() => {
+        jest.spyOn(Validator.prototype, 'isValidOptions').mockReturnValue(false);
       });
 
+      afterEach(() => {
+        Validator.prototype.isValidOptions.mockRestore();
+      })
+
       it('should raise an error', function () {
-        expect(() => new Validator()).to.throw();
+        expect(() => new Validator()).toThrow();
       });
     });
   });
 
   describe('#isValid()', function () {
     it('should return false if called without validate()', function () {
-      expect(validator.isValid()).to.equal(false)
+      expect(validator.isValid()).toEqual(false);
     });
 
     describe('when validation() is passing and validate() is called', function () {
-      beforeEach(function (done) {
-        sandbox.spy(validator, 'validation').returnValue = Promise.resolve(true);
-        validator.validate().then( () => done() );
+      beforeEach(async () => {
+        jest.spyOn(validator, 'validation').mockReturnValue(Promise.resolve({state: true}));
+        await validator.validate();
       });
 
       it('should return true', function () {
-        expect(validator.isValid()).to.equal(true);
+        expect(validator.isValid()).toEqual(true);
       });
     });
   });
 
   describe('#validate()', function () {
-    it('should return a promise', function () {
-      expect(validator.validate()).to.be.a('promise');
+    beforeEach(() => {
+      jest.spyOn(validator, 'validation').mockReturnValue(Promise.resolve({state: true}));
+    });
+
+    it('should return the result of validation()', function () {
+      return expect(validator.validate()).resolves.toStrictEqual({state: true});
     });
   });
 });

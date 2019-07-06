@@ -1,5 +1,3 @@
-import {expect, noop} from '../helper';
-
 import TypeValidator from '../../src/validators/type-validator';
 
 let validator;
@@ -12,7 +10,7 @@ let behavesLikeAValidValidator = () => {
     });
 
     it('should be a valid', function () {
-      expect(validator.isValid()).to.equal(true);
+      expect(validator.isValid()).toEqual(true);
     });
   });
 };
@@ -22,12 +20,12 @@ let doesNotBehavesLikeAValidValidator = () => {
     beforeEach((done) => {
       validator
         .validate()
-        .catch(noop)
+        .catch(() => {})
         .finally(() => done());
     });
 
     it('should not be a valid', function () {
-      expect(validator.isValid()).to.equal(false);
+      expect(validator.isValid()).toEqual(false);
     });
   });
 };
@@ -36,7 +34,7 @@ describe('TypeValidator', function () {
   describe('#constructor()', function () {
     describe('when type is invalid', function () {
       it('should throw an error', function () {
-        expect(() => new TypeValidator({type: 'foobar'})).to.throw();
+        expect(() => new TypeValidator({type: 'foobar'})).toThrow();
       });
     });
   });
