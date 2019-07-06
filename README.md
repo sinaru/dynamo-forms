@@ -1,6 +1,6 @@
 # DynamoForms
 
-[![Build Status](https://travis-ci.org/sinaru/dynamo-forms.svg?branch=master)](https://travis-ci.org/sinaru/dynamo-forms)
+[![Build Status](https://travis-ci.org/sinaru/DynamoForms.svg?branch=master)](https://travis-ci.org/sinaru/dynamo-forms)
 
 _Make your HTML forms super smart only with HTML._ 
 
