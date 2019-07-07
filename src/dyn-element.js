@@ -18,9 +18,9 @@ const DynElement = class DynElement {
       if (!validation.isValid()) {
         return validation.errorMessage();
       }
-      return [];
-
-    });
+      return null;
+    })
+      .filter(item => item !== null);
   }
 
   _validations() {
