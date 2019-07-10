@@ -27,20 +27,26 @@ const DynElement = class DynElement {
     const data = this.element.dataset;
 
     if (data['dynType'] !== undefined) {
-      this.validations.push(new TypeValidator({
+      const Klass = DynElement._classRef('dynType');
+
+      this.validations.push(new Klass({
         value: this.element.value,
         ...this._ruleOptions('dynType')
       }));
 
     }
     if (data['dynGroup'] !== undefined) {
-      this.validations.push(new GroupValidator({
+      const Klass = DynElement._classRef('dynGroup');
+
+      this.validations.push(new Klass({
         value: this.element.value,
         ...this._ruleOptions('dynGroup')
       }));
     }
     if (data['dynFunction'] !== undefined) {
-      this.validations.push(new FunctionValidator({
+      const Klass = DynElement._classRef('dynFunction');
+
+      this.validations.push(new Klass({
         value: this.element.value,
         ...this._ruleOptions('dynFunction')
       }));
@@ -67,6 +73,16 @@ const DynElement = class DynElement {
     });
 
     return options;
+  }
+
+  static _classRefMap = {
+    'dynType': TypeValidator,
+    'dynGroup': GroupValidator,
+    'dynFunction': FunctionValidator
+  };
+
+  static _classRef(rule) {
+    return DynElement._classRefMap[rule];
   }
 };
 
