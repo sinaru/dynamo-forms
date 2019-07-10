@@ -1,12 +1,12 @@
 import TypeValidator from './validators/type-validator';
 import GroupValidator from './validators/group-validator';
+import FunctionValidator from './validators/function-validator';
 
 const DynElement = class DynElement {
   constructor(element, parentForm) {
     this._parentForm = parentForm;
     this.validations = [];
     this.element = element;
-    this.element.dynElement = this;
   }
 
   validate() {
@@ -35,6 +35,13 @@ const DynElement = class DynElement {
         this.element.value,
         this._parentForm.groupValues(data['dynGroup']),
         this._ruleOptions('dynGroup', data)));
+    }
+    if (data['dynFunction']) {
+      this.validations.push(new FunctionValidator(
+        data['dynFunction'],
+        this.element.value,
+        this._ruleOptions('dynFunction', data)
+      ));
     }
 
     return this.validations;
