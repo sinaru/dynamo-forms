@@ -33,7 +33,6 @@ const DynElement = class DynElement {
     if (data['dynGroup']) {
       this.validations.push(new GroupValidator(
         this.element.value,
-        this._parentForm.groupValues(data['dynGroup']),
         this._ruleOptions('dynGroup', data)));
     }
     if (data['dynFunction']) {
