@@ -29,28 +29,29 @@ const DynElement = class DynElement {
     if (data['dynType'] !== undefined) {
       this.validations.push(new TypeValidator({
         value: this.element.value,
-        ...this._ruleOptions('dynType', data)
+        ...this._ruleOptions('dynType')
       }));
 
     }
     if (data['dynGroup'] !== undefined) {
       this.validations.push(new GroupValidator({
         value: this.element.value,
-        ...this._ruleOptions('dynGroup', data)
+        ...this._ruleOptions('dynGroup')
       }));
     }
     if (data['dynFunction'] !== undefined) {
       this.validations.push(new FunctionValidator({
         value: this.element.value,
-        ...this._ruleOptions('dynFunction', data)
+        ...this._ruleOptions('dynFunction')
       }));
     }
 
     return this.validations;
   }
 
-  _ruleOptions(rule, dataSet) {
+  _ruleOptions(rule) {
 
+    const dataSet = this.element.dataset;
     let options = {};
 
     if (dataSet.dynName) {
