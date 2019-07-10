@@ -90,14 +90,4 @@ describe('DynForm', () => {
       });
     });
   });
-
-  describe('#grouValues()', () => {
-    beforeEach(() => {
-      dynForm = new DynForm(form);
-    });
-
-    it('should return all the values for the given group', () => {
-      expect(dynForm.groupValues('personal_name')).toEqual(['Martin']);
-    });
-  });
 });

@@ -1,10 +1,15 @@
 import Validator from './validator';
 
 export default class GroupValidator extends Validator {
-  constructor(value, groupValues, options) {
+  constructor(value, options) {
     super({...options, value});
 
-    this._groupValues = groupValues;
+    this._groupValues = Array
+      .from(document.body.querySelectorAll(options.selectors))
+      .map(element => element.value)
+      .filter(value => value !== '');
+
+    this._groupValues = this._groupValues.concat(this.value);
   }
 
   validation() {

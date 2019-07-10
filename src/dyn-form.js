@@ -13,13 +13,6 @@ export default class DynForm {
     this._handleFormSubmit();
   }
 
-  groupValues(groupName) {
-    return Array
-      .from(this._form.querySelectorAll(`*[data-dyn-group="${groupName}"]`))
-      .map(element => element.value)
-      .filter(value => value !== '');
-  }
-
   onSubmit(event) {
     event.preventDefault();
     const elements = this._dynElements;
