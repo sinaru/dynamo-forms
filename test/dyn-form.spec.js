@@ -17,7 +17,8 @@ let createForm = () => {
             <input name="number" type="text"
                    data-dyn-field
                    data-dyn-name="Amount"
-                   data-dyn-type="number"
+                   data-dyn-type
+                   data-dyn-type-type="number"
                    value="${ formAmountValue }"
             >
             
@@ -27,14 +28,12 @@ let createForm = () => {
                    data-dyn-name="First Name"
                    data-dyn-group="personal_name"
                    data-dyn-group-rule="any-present"
+                   data-dyn-group-selectors="#last-name"
                    value="${ formFirstName }"
             >
 
             <label for="last-name">Last Name</label>
-            <input id="last-name" name="last-name" type="text"
-                   data-dyn-name="Last Name"
-                   data-dyn-group="personal_name"
-            >
+            <input id="last-name" name="last-name" type="text">
         </div>
 
         <button type="submit">Submit</button>

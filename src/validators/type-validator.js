@@ -1,10 +1,6 @@
 import Validator from './validator';
 
 export default class TypeValidator extends Validator {
-  constructor(type, value, options = {}) {
-    super({type, value, ...options});
-  }
-
   isValidOptions(options) {
     const keys = Object.keys(options);
 

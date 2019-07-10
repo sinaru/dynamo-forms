@@ -3,8 +3,7 @@ import GroupValidator from './validators/group-validator';
 import FunctionValidator from './validators/function-validator';
 
 const DynElement = class DynElement {
-  constructor(element, parentForm) {
-    this._parentForm = parentForm;
+  constructor(element) {
     this.validations = [];
     this.element = element;
   }
@@ -27,20 +26,24 @@ const DynElement = class DynElement {
     this.validations = [];
     const data = this.element.dataset;
 
-    if (data['dynType']) {
-      this.validations.push(new TypeValidator(data['dynType'], this.element.value, this._ruleOptions('dynType', data)));
+    if (data['dynType'] !== undefined) {
+      this.validations.push(new TypeValidator({
+        value: this.element.value,
+        ...this._ruleOptions('dynType', data)
+      }));
+
     }
-    if (data['dynGroup']) {
-      this.validations.push(new GroupValidator(
-        this.element.value,
-        this._ruleOptions('dynGroup', data)));
+    if (data['dynGroup'] !== undefined) {
+      this.validations.push(new GroupValidator({
+        value: this.element.value,
+        ...this._ruleOptions('dynGroup', data)
+      }));
     }
-    if (data['dynFunction']) {
-      this.validations.push(new FunctionValidator(
-        data['dynFunction'],
-        this.element.value,
-        this._ruleOptions('dynFunction', data)
-      ));
+    if (data['dynFunction'] !== undefined) {
+      this.validations.push(new FunctionValidator({
+        value: this.element.value,
+        ...this._ruleOptions('dynFunction', data)
+      }));
     }
 
     return this.validations;
