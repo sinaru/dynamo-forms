@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="../../dist/dynamo-forms.js"></script>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const isValueSpecial = function (value) {
+    return new Promise((resolve) => {
+      if (value === 'special') {
+        resolve({state: true});
+      } else {
+        resolve({state: false});
+      }
+    });
+
+  };
+</script>
+<div>
+  <form class="dynamo-forms">
+    <div class="dynamo-errors"></div>
+    <div>
+      <label for="special">Special field</label>
+      <input id="special"
+        name="number" type="text"
+        data-dyn-field
+        data-dyn-function-error="Value should be 'special'"
+        data-dyn-function="isValueSpecial"
+      >
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+</body>
+</html>
