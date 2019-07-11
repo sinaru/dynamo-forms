@@ -30,6 +30,7 @@ const DynElement = class DynElement {
       const Klass = DynElement._classRef(rule);
 
       this.validations.push(new Klass({
+        name: this.element.dataset.dynName,
         value: this.element.value,
         ...this._ruleOptions(rule)
       }));
@@ -54,10 +55,6 @@ const DynElement = class DynElement {
 
     const dataSet = this.element.dataset;
     let options = {};
-
-    if (dataSet.dynName) {
-      options['name'] = dataSet.dynName;
-    }
 
     Object.entries(dataSet).forEach((entry) => {
       const match = RegExp(`^${rule}(?<option>.+)$`).exec(entry[0]);
