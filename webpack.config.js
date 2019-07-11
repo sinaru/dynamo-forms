@@ -5,7 +5,7 @@ const filename = `dynamo-forms${env === 'build' ? '.min' : ''}.js`;
 
 module.exports = {
   mode: mode,
-  devtool: 'inline-source-map',
+  devtool: mode === 'development' ? 'inline-source-map' : '',
   entry: [
     './src/index.js'
   ],
