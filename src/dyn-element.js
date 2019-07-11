@@ -24,35 +24,30 @@ const DynElement = class DynElement {
 
   _validations() {
     this.validations = [];
-    const data = this.element.dataset;
+    const rules = this._rules();
 
-    if (data['dynType'] !== undefined) {
-      const Klass = DynElement._classRef('dynType');
-
-      this.validations.push(new Klass({
-        value: this.element.value,
-        ...this._ruleOptions('dynType')
-      }));
-
-    }
-    if (data['dynGroup'] !== undefined) {
-      const Klass = DynElement._classRef('dynGroup');
+    rules.forEach((rule) => {
+      const Klass = DynElement._classRef(rule);
 
       this.validations.push(new Klass({
         value: this.element.value,
-        ...this._ruleOptions('dynGroup')
+        ...this._ruleOptions(rule)
       }));
-    }
-    if (data['dynFunction'] !== undefined) {
-      const Klass = DynElement._classRef('dynFunction');
-
-      this.validations.push(new Klass({
-        value: this.element.value,
-        ...this._ruleOptions('dynFunction')
-      }));
-    }
+    });
 
     return this.validations;
+  }
+
+  _rules() {
+    const dataSet = this.element.dataset;
+
+    return Object
+      .entries(dataSet)
+      .filter((entry) => {
+        return !(['dynField', 'dynName'].includes(entry[0])) &&
+        entry[1] === '';
+      })
+      .map(item => item[0]);
   }
 
   _ruleOptions(rule) {
