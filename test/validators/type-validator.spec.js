@@ -3,7 +3,7 @@ import TypeValidator from '../../src/validators/type-validator';
 let validator;
 
 let behavesLikeAValidValidator = () => {
-  describe('behaves like valid', function () {
+  describe('and after validate()', function () {
     beforeEach(() => {
       return validator.validate();
     });
@@ -15,7 +15,7 @@ let behavesLikeAValidValidator = () => {
 };
 
 let doesNotBehavesLikeAValidValidator = () => {
-  describe('does not behaves like valid', function () {
+  describe('and after validate()', function () {
     beforeEach(() => {
       return validator.validate();
     });
