@@ -33,7 +33,7 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "npx webpack",
+    "build": "npx webpack && npx webpack --env=build",
     "watch": "npx webpack --watch"
   },
   "keywords": [],
