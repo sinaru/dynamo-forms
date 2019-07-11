@@ -9,8 +9,9 @@ web pages.
 
 ## Installation
 
-You can either use `dynamo-forms.js` or `dynamo-forms.min.js` found in ['dist'](\dist) folder. Then add `
-.dynamo-forms` css class to each `<form>` you want to validate. 
+You can either use `dynamo-forms.js` or `dynamo-forms.min.js` found in 
+[`dist`](https://github.com/sinaru/DynamoForms/tree/master/dist) folder. Then add `.dynamo-forms` css class to each  
+`<form>` you want to validate. 
 
 In the form you should have an HTML element with `.dynamo-errors`. This is used as the parent element to render the 
 form errors.
@@ -29,10 +30,12 @@ Here is an example that uses Type validator for an input.
    <div class="dynamo-errors"></div>
    <div>
        <label>Amount</label>
-       <input name="number" type="text"
-              data-dyn-field
-              data-dyn-name="Amount"
-              data-dyn-type="number"
+       <input 
+         name="number" type="text"
+         data-dyn-field
+         data-dyn-name="Amount"
+         data-dyn-type
+         data-dyn-type-type="number"
        >
    </div>
 
