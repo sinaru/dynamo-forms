@@ -23,11 +23,13 @@
     <div class="dynamo-errors"></div>
     <div>
       <label for="special">Special field</label>
-      <input id="special"
+      <input
+        id="special"
         name="number" type="text"
         data-dyn-field
+        data-dyn-function
         data-dyn-function-error="Value should be 'special'"
-        data-dyn-function="isValueSpecial"
+        data-dyn-function-handler="isValueSpecial"
       >
     </div>
 

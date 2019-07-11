@@ -7,7 +7,7 @@ export default class DynForm {
     this._form
       .querySelectorAll('*[data-dyn-field]')
       .forEach((field) => {
-        this._dynElements.push(new DynElement(field, this));
+        this._dynElements.push(new DynElement(field));
       });
 
     this._handleFormSubmit();

@@ -3,8 +3,7 @@ import GroupValidator from './validators/group-validator';
 import FunctionValidator from './validators/function-validator';
 
 const DynElement = class DynElement {
-  constructor(element, parentForm) {
-    this._parentForm = parentForm;
+  constructor(element) {
     this.validations = [];
     this.element = element;
   }
@@ -25,29 +24,35 @@ const DynElement = class DynElement {
 
   _validations() {
     this.validations = [];
-    const data = this.element.dataset;
+    const rules = this._rules();
 
-    if (data['dynType']) {
-      this.validations.push(new TypeValidator(data['dynType'], this.element.value, this._ruleOptions('dynType', data)));
-    }
-    if (data['dynGroup']) {
-      this.validations.push(new GroupValidator(
-        this.element.value,
-        this._ruleOptions('dynGroup', data)));
-    }
-    if (data['dynFunction']) {
-      this.validations.push(new FunctionValidator(
-        data['dynFunction'],
-        this.element.value,
-        this._ruleOptions('dynFunction', data)
-      ));
-    }
+    rules.forEach((rule) => {
+      const Klass = DynElement._classRef(rule);
+
+      this.validations.push(new Klass({
+        value: this.element.value,
+        ...this._ruleOptions(rule)
+      }));
+    });
 
     return this.validations;
   }
 
-  _ruleOptions(rule, dataSet) {
+  _rules() {
+    const dataSet = this.element.dataset;
 
+    return Object
+      .entries(dataSet)
+      .filter((entry) => {
+        return !(['dynField', 'dynName'].includes(entry[0])) &&
+        entry[1] === '';
+      })
+      .map(item => item[0]);
+  }
+
+  _ruleOptions(rule) {
+
+    const dataSet = this.element.dataset;
     let options = {};
 
     if (dataSet.dynName) {
@@ -63,6 +68,16 @@ const DynElement = class DynElement {
     });
 
     return options;
+  }
+
+  static _classRefMap = {
+    'dynType': TypeValidator,
+    'dynGroup': GroupValidator,
+    'dynFunction': FunctionValidator
+  };
+
+  static _classRef(rule) {
+    return DynElement._classRefMap[rule];
   }
 };
 

@@ -8,7 +8,8 @@ let createElement = () => {
 
   elm.dataset.dynField = '';
   elm.dataset.dynName = 'Number';
-  elm.dataset.dynType = 'number';
+  elm.dataset.dynType = '';
+  elm.dataset.dynTypeType = 'number';
   elm.value = numberValue;
   return elm;
 };

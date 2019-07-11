@@ -1,8 +1,8 @@
 import Validator from './validator';
 
 export default class GroupValidator extends Validator {
-  constructor(value, options) {
-    super({...options, value});
+  constructor(options) {
+    super(options);
 
     this._groupValues = Array
       .from(document.body.querySelectorAll(options.selectors))
