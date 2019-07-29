@@ -1,6 +1,7 @@
 # DynamoForms
 
 [![Build Status](https://travis-ci.org/sinaru/DynamoForms.svg?branch=master)](https://travis-ci.org/sinaru/DynamoForms)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md)
 
 _Make your HTML forms super smart only with HTML._ 
 
