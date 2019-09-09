@@ -8,6 +8,8 @@ _Make your HTML forms super smart only with HTML._
 DynamoForms is a JavaScript library that uses HTML syntax to provide dynamic and advance form validation for your 
 web pages. 
 
+**User Guide:** [https://sinaru.github.io/DynamoForms/](https://sinaru.github.io/DynamoForms/)
+
 ## Installation
 
 You can either use `dynamo-forms.js` or `dynamo-forms.min.js` found in 
@@ -43,3 +45,11 @@ Here is an example that uses Type validator for an input.
    <button type="submit">Submit</button>
 </form>
 ```
+
+## Development
+
+You should have at least Node.js 10. See [installation guide](https://nodejs.org/en/download/package-manager/#debian-and
+-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages)
+on how to install Node.js.
+
+Simply run `npm install` to install the packages.
