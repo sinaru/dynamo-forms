@@ -74,4 +74,18 @@ describe('TypeValidator', function () {
       });
     });
   });
+
+  describe('when type is email', function () {
+    describe('for valid values', function () {
+      ['userj@site.com', 'something1234@website.io'].forEach((value) => {
+        describe(`where value is ${value}`, function () {
+          beforeEach(function () {
+            validator = new TypeValidator({ type: 'email', value: value });
+          });
+
+          behavesLikeAValidValidator();
+        });
+      });
+    });
+  });
 });
