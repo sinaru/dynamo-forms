@@ -38,3 +38,41 @@ Here is an example that uses Type validator for an input.
    <button type="submit">Submit</button>
 </form>
 ```
+
+## Validators
+
+### Type
+
+Type validator can be used to define a value type for a field.
+
+Supported types are:
+
+- Number
+- Currency
+- Email
+
+**Number**: Number supports any positive or negative integer or a decimal value. The digit should range from 0-9.
+
+**Currency:** Currency value should be prefixed with at least two and maximum of three characters. This is to
+represent tell the currency type. After that, you can specify the amount separated by comma for each group of three
+ digits. 
+  
+**Email:** This is to validate the input as an email address.
+  
+### Group
+ 
+This validator is useful when you want to validate a collection of inputs as a single entity. 
+
+For example, if you want to check if at least one value is present for land or mobile number, this validator can be
+used.  
+
+### Function
+
+When you want ta custom validation, you can define a function that acts as a validator. Then use that function
+ validator with the name of the function that you created. 
+ 
+It is important that the defined function returns a promise. The function will be called with the value of the input
+where the function validator is used. The function should resolve the promise with an object when the validation
+should pass or fail.
+
+For the pass case resolve the promise with `{state: true}`. For the fail case, resolve it with `{state: false}`.
