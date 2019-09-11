@@ -48,8 +48,7 @@ Here is an example that uses Type validator for an input.
 
 ## Development
 
-You should have at least Node.js 10. See [installation guide](https://nodejs.org/en/download/package-manager/#debian-and
--ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages)
+You should have at least Node.js 10. See [installation guide](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions-enterprise-linux-fedora-and-snap-packages)
 on how to install Node.js.
 
 Simply run `npm install` to install the packages.
